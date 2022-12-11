@@ -1,25 +1,23 @@
 import { useGameContext } from "../context/gameContext";
 import { motion, AnimatePresence } from "framer-motion";
-import MenuButton from "./MenuButton";
 import Button from "./Button";
 
 const Header = () => {
   const { setShowMenu, sound, setSound, setScreen } = useGameContext();
   return (
-    <div className="w-max flex justify-between items-center space-x-12 pb-12">
+    <div className="w-max flex flex-col md:flex-row justify-between items-center space-y-12 md:space-y-0 md:space-x-12 pb-12">
       <h1 className=" text-3xl font-black text-neutral-800">Memory Game</h1>
-      <Button text="WIN" onClick={() => setScreen("gameOver")} />
       <div className="flex space-x-4">
+        <Button text="WIN" onClick={() => setScreen("gameOver")} />
         <div
           onClick={() => setShowMenu(true)}
-          className="cursor-pointer text-neutral-800 flex justify-between items-center space-x-2 border-2 border-neutral-800 p-2 rounded-md"
+          className="cursor-pointer text-neutral-800 flex justify-between items-center space-x-2 border-4 border-neutral-800 p-3 rounded-full"
         >
           <motion.svg
             initial={{ rotate: 0 }}
             whileHover={{
               rotate: [null, 35, -35, 0],
-              scale: [null, 1.05, 1],
-              transition: { duration: 0.5 },
+              transition: { duration: 0.6 },
             }}
             width={32}
             height={32}
@@ -33,20 +31,20 @@ const Header = () => {
         <motion.div
           onClick={() => setSound((prev) => (prev === "on" ? "off" : "on"))}
           className=" text-neutral-800  
-          }  cursor-pointer flex justify-between items-center space-x-2 border-2 border-neutral-800 p-2 rounded-md overflow-hidden"
+          }  cursor-pointer flex justify-between items-center space-x-2 border-4 border-neutral-800 p-3 rounded-full overflow-hidden"
         >
           <AnimatePresence mode="wait">
             {sound === "on" ? (
               <motion.svg
                 key={"soundOn"}
-                initial={{ y: -40 }}
+                initial={{ scaleX: -1 }}
                 animate={{
-                  y: 0,
-                  transition: { type: "spring", duration: 0.2, bounce: 0.4 },
+                  scaleX: 1,
+                  transition: { type: "spring", duration: 0.3, bounce: 0.4 },
                 }}
                 exit={{
-                  y: 40,
-                  transition: { type: "spring", duration: 0.2 },
+                  scaleX: -1,
+                  transition: { type: "tween", duration: 0.4 },
                 }}
                 width={32}
                 height={32}
@@ -59,14 +57,14 @@ const Header = () => {
             ) : (
               <motion.svg
                 key={"soundOff"}
-                initial={{ y: -40 }}
+                initial={{ scaleX: -1 }}
                 animate={{
-                  y: 0,
-                  transition: { type: "spring", duration: 0.2, bounce: 0.4 },
+                  scaleX: 1,
+                  transition: { type: "spring", duration: 0.3, bounce: 0.4 },
                 }}
                 exit={{
-                  y: 40,
-                  transition: { type: "spring", duration: 0.2 },
+                  scaleX: -1,
+                  transition: { type: "tween", duration: 0.4 },
                 }}
                 width={32}
                 height={32}

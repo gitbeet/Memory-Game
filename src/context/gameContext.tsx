@@ -24,6 +24,7 @@ interface GameContextInterface {
   showNewScreen: boolean;
   disabled: boolean;
   showConfirmWindow: boolean;
+  timer: number;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setShowNewScreen: React.Dispatch<React.SetStateAction<boolean>>;
   setScreen: React.Dispatch<React.SetStateAction<string>>;
@@ -36,6 +37,7 @@ interface GameContextInterface {
   setActiveItems: React.Dispatch<React.SetStateAction<BoardItemInterface[]>>;
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setShowConfirmWindow: React.Dispatch<React.SetStateAction<boolean>>;
+  setTimer: React.Dispatch<React.SetStateAction<number>>;
   toggleItemVisible: (id: number) => void;
   restartGame: () => void;
   exitGame: () => void;
@@ -76,6 +78,7 @@ const GameContextProvider = ({ children }: Props) => {
   const [activeItems, setActiveItems] = useState<BoardItemInterface[]>([]);
   const [disabled, setDisabled] = useState(false);
   const [showConfirmWindow, setShowConfirmWindow] = useState(false);
+  const [timer, setTimer] = useState(0);
 
   function generateBoard() {
     let arr: number[] = [];
@@ -169,6 +172,7 @@ const GameContextProvider = ({ children }: Props) => {
     setActiveItems([]);
     setActivePlayer(1);
     setPlayersFinished(0);
+    setTimer(0);
     setScreen("game");
   };
 
@@ -177,6 +181,7 @@ const GameContextProvider = ({ children }: Props) => {
     setActiveItems([]);
     setActivePlayer(1);
     setPlayersFinished(0);
+    setTimer(0);
     setScreen("welcome");
   };
 
@@ -223,6 +228,7 @@ const GameContextProvider = ({ children }: Props) => {
         showNewScreen,
         disabled,
         showConfirmWindow,
+        timer,
         setScreen,
         setTheme,
         setSound,
@@ -238,6 +244,7 @@ const GameContextProvider = ({ children }: Props) => {
         setDisabled,
         exitGame,
         setShowConfirmWindow,
+        setTimer,
       }}
     >
       {children}

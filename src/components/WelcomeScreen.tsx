@@ -38,7 +38,6 @@ const WelcomeScreen = () => {
     >
       <motion.h1
         variants={parentVariants}
-        transition={{ delay: 0.2 }}
         className="text-5xl font-black text-neutral-800"
       >
         Memory Game

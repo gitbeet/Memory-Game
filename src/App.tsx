@@ -17,7 +17,7 @@ function App() {
     exitGame,
   } = useGameContext();
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-800">
+    <div className="absolute top-0 left-0 right-0 bottom-0 min-w-full min-h-full">
       {screen === "welcome" ? <WelcomeScreen /> : null}
       {screen === "game" ? <GameScreen /> : null}
       {screen === "gameOver" ? <GameOverScreen /> : null}

@@ -53,7 +53,7 @@ const singlePlayerChildrenVariants = {
 };
 
 const GameOverScreen = () => {
-  const { boards, setScreen, restartGame } = useGameContext();
+  const { boards, setScreen, restartGame, timer } = useGameContext();
 
   const winner = [...boards]
     .map((board) => {
@@ -68,7 +68,7 @@ const GameOverScreen = () => {
       variants={singlePlayerParentVariants}
       initial="hidden"
       animate="visible"
-      className="space-y-24"
+      className="space-y-24 w-[]"
     >
       <motion.h1
         variants={singlePlayerChildrenVariants}
@@ -78,10 +78,19 @@ const GameOverScreen = () => {
       </motion.h1>
       <motion.p
         variants={singlePlayerChildrenVariants}
+        className="text-2xl text-semibold text-neutral-800 w-full md:w-max"
+      >
+        You won the game in only :{" "}
+        <span className="font-black">{boards[0].moves}</span> moves
+      </motion.p>
+      <motion.p
+        variants={singlePlayerChildrenVariants}
         className="text-2xl text-semibold text-neutral-800"
       >
-        You won the game in :{" "}
-        <span className="font-black">{boards[0].moves}</span> moves
+        Time :{" "}
+        <span className="font-black">
+          {new Date(timer).toISOString().slice(14, -5)}
+        </span>
       </motion.p>
     </motion.div>
   );
@@ -131,7 +140,7 @@ const GameOverScreen = () => {
       variants={parentVariants}
       initial="hidden"
       animate="visible"
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-32"
+      className="absolute w-[90%] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-32"
       style={{ translateX: "-50%", translateY: "-50%" }}
     >
       {boards.length < 2 ? singlePlayerContent : multiPlayerContent}

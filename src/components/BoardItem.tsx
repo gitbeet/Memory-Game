@@ -61,7 +61,7 @@ const BoardItem = ({ boardItem }: Props) => {
            : visible
            ? "bg-neutral-300"
            : "bg-neutral-800"
-       } rounded-lg text-neutral-100 flex justify-center items-center`}
+       } rounded-2xl text-neutral-100 flex justify-center items-center`}
     >
       {visible ? (
         <motion.p
