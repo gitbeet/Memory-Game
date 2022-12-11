@@ -1,20 +1,14 @@
-import React from "react";
+import { useGameContext } from "../context/gameContext";
 import Board from "./Board";
+import Header from "./Header";
 import Players from "./Players";
-interface Props {
-  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const GameScreen = ({ setShowMenu }: Props) => {
+
+const GameScreen = () => {
+  const { setShowMenu, restartGame, setShowNewScreen, setActivePlayer } =
+    useGameContext();
   return (
-    <div className="absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-4">
-      <div className="flex space-x-12">
-        <h1>Game name</h1>
-        <div className="flex space-x-8">
-          <button>Restart</button>
-          <button>New Game</button>
-          <button>Menu</button>
-        </div>
-      </div>
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-4">
+      <Header />
       <Board />
       <Players />
     </div>

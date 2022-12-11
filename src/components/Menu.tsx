@@ -1,43 +1,44 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useGameContext } from "../context/gameContext";
+import MenuSetting from "./MenuSetting";
 
-interface Props {
-  setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-  setPlayers: React.Dispatch<React.SetStateAction<number>>;
-  setSound: React.Dispatch<React.SetStateAction<boolean>>;
-  setBoardSize: React.Dispatch<React.SetStateAction<number>>;
-  boardSize: number;
-  players: number;
-  sound: boolean;
-  theme: string;
-}
-
-const Menu = ({
-  setShowMenu,
-  setTheme,
-  setPlayers,
-  setSound,
-  setBoardSize,
-  players,
-  sound,
-  theme,
-  boardSize,
-}: Props) => {
-  const [tempPlayers, setTempPlayers] = useState(players);
+const Menu = () => {
+  const {
+    players,
+    screen,
+    sound,
+    theme,
+    boardSize,
+    setShowMenu,
+    setTheme,
+    setPlayers,
+    setSound,
+    setBoardSize,
+    setScreen,
+    restartGame,
+  } = useGameContext();
+  const [tempPlayers, setTempPlayers] = useState<number | string>(players);
   const [tempSound, setTempSound] = useState(sound);
   const [tempTheme, setTempTheme] = useState(theme);
-  const [tempBoardSize, setTempBoardSize] = useState(boardSize);
+  const [tempBoardSize, setTempBoardSize] = useState(
+    `${boardSize}x${boardSize}`
+  );
 
   const saveChanges = () => {
     setShowMenu(false);
     setTheme(tempTheme);
-    setPlayers(tempPlayers);
+    setPlayers(Number(tempPlayers));
     setSound(tempSound);
-    setBoardSize(tempBoardSize);
+    setBoardSize(parseInt(tempBoardSize[0]));
+  };
+
+  const exit = () => {
+    setScreen("welcome");
+    setShowMenu(false);
   };
   return (
     <>
-      <div className="absolute z-10 left-1/2 top-2/3 -translate-x-1/2 -translate-y-1/2 bg-white p-4">
+      <div className="fixed z-10 bg-neutral-100 rounded-md  p-8 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div
           onClick={() => setShowMenu(false)}
           className="text-right cursor-pointer"
@@ -45,80 +46,45 @@ const Menu = ({
           x
         </div>
         <h1 className="text-3xl">Menu</h1>
-        <div className="flex space-x-8">
-          <h1>Theme</h1>
-          <div className="flex space-x-4">
-            <button
-              className={tempTheme === "numbers" ? "bg-red-400" : ""}
-              onClick={() => setTempTheme("numbers")}
-            >
-              Numbers
-            </button>
-            <button
-              className={tempTheme === "icons" ? "bg-red-400" : ""}
-              onClick={() => setTempTheme("icons")}
-            >
-              Icons
-            </button>
-          </div>
-        </div>
-        <div className="flex justify-between">
-          <h1>Sound</h1>
-          <div className="flex space-x-4">
-            <button
-              onClick={() => setTempSound(true)}
-              className={tempSound ? "bg-red-400" : ""}
-            >
-              On
-            </button>
-            <button
-              onClick={() => setTempSound(false)}
-              className={!tempSound ? "bg-red-400" : ""}
-            >
-              Off
-            </button>
-          </div>
-        </div>
-        <div className="flex justify-between">
-          <h1>Players</h1>
-          <div className="flex space-x-4">
-            <button
-              onClick={() =>
-                setTempPlayers((prev) => (prev < 2 ? prev : prev - 1))
-              }
-            >
-              {"<"}
-            </button>
-            <p>{tempPlayers}</p>
-            <button
-              onClick={() =>
-                setTempPlayers((prev) => (prev > 3 ? prev : prev + 1))
-              }
-            >
-              {">"}
-            </button>
-          </div>
-        </div>
-        <div>
-          <div className="flex justify-between">
-            <h1>Board Size</h1>
-            <div className="flex space-x-4">
-              <button onClick={() => setTempBoardSize(4)}>{"<"}</button>
-              <p>
-                {tempBoardSize}x{tempBoardSize}
-              </p>
-              <button onClick={() => setTempBoardSize(6)}>{">"}</button>
-            </div>
-          </div>
+        <div className="space-y-8">
+          <MenuSetting
+            disabledInGame={false}
+            title="Theme"
+            tempValue={tempTheme}
+            setTempValue={setTempTheme}
+            options={["Numbers", "Icons"]}
+          />
+          <MenuSetting
+            disabledInGame={false}
+            title="Sound"
+            tempValue={tempSound}
+            setTempValue={setTempSound}
+            options={["On", "Off"]}
+          />
+          <MenuSetting
+            disabledInGame={true}
+            title="Players"
+            tempValue={tempPlayers.toString()}
+            setTempValue={setTempPlayers}
+            options={["1", "2", "3", "4"]}
+          />
+          <MenuSetting
+            disabledInGame={true}
+            title="Board Size"
+            tempValue={tempBoardSize}
+            setTempValue={setTempBoardSize}
+            options={["4x4", "6x6"]}
+          />
         </div>
         <div>
           <div className="space-x-8">
             <button onClick={() => saveChanges()}>Accept</button>
             <button onClick={() => setShowMenu(false)}>Cancel</button>
           </div>
+          <button onClick={() => exit()}>Exit</button>
         </div>
       </div>
-      <div className="fixed z-4 top-0 bottom-0 left-0 right-0 bg-black bg-opacity-25"></div>
+      <div className="fixed z-4 top-0 bottom-0 left-0 right-0 bg-neutral-800 bg-opacity-25"></div>
     </>
   );
 };

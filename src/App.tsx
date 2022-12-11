@@ -1,35 +1,20 @@
-import { useState } from "react";
 import "./App.css";
+import GameOverScreen from "./components/GameOverScreen";
 import GameScreen from "./components/GameScreen";
 import Menu from "./components/Menu";
+import NewGameScreen from "./components/NewGameScreen";
 import WelcomeScreen from "./components/WelcomeScreen";
+import { useGameContext } from "./context/gameContext";
 
 function App() {
-  const [screen, setScreen] = useState("welcome");
-  const [theme, setTheme] = useState("numbers");
-  const [sound, setSound] = useState(true);
-  const [players, setPlayers] = useState(1);
-  const [boardSize, setBoardSize] = useState(4);
-  const [showMenu, setShowMenu] = useState(false);
+  const { screen, showMenu, showNewScreen } = useGameContext();
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-red-300">
-      {screen === "welcome" ? (
-        <WelcomeScreen setShowMenu={setShowMenu} setScreen={setScreen} />
-      ) : null}
-      {screen === "game" ? <GameScreen setShowMenu={setShowMenu} /> : null}
-      {showMenu ? (
-        <Menu
-          setShowMenu={setShowMenu}
-          setTheme={setTheme}
-          setPlayers={setPlayers}
-          setSound={setSound}
-          setBoardSize={setBoardSize}
-          players={players}
-          theme={theme}
-          sound={sound}
-          boardSize={boardSize}
-        />
-      ) : null}
+    <div className="absolute top-0 left-0 right-0 bottom-0 w-full h-full bg-gray-800">
+      {screen === "welcome" ? <WelcomeScreen /> : null}
+      {screen === "game" ? <GameScreen /> : null}
+      {screen === "gameOver" ? <GameOverScreen /> : null}
+      {showNewScreen ? <NewGameScreen /> : null}
+      {showMenu ? <Menu /> : null}
     </div>
   );
 }
