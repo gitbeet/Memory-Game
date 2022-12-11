@@ -29,8 +29,8 @@ const MenuSettingOption = ({
       >
         <motion.p
           className={`${
-            isActive ? "text-neutral-100" : "text-neutral-800"
-          } relative  z-10 mx-4 font-semibold`}
+            isActive ? "text-neutral-100" : "text-neutral-300"
+          } relative  z-10 mx-4 font-bold`}
         >
           {option}
         </motion.p>

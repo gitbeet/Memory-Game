@@ -1,15 +1,9 @@
-import { useGameContext } from "../context/gameContext";
-
 const MenuButton = () => {
-  const { setShowMenu } = useGameContext();
   return (
-    <div
-      onClick={() => setShowMenu(true)}
-      className="border-4 rounded-full text-neutral-800 border-neutral-800 p-2 cursor-pointer"
-    >
+    <div className=" text-neutral-800 cursor-pointer">
       <svg
-        width={40}
-        height={40}
+        width={32}
+        height={32}
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 512 512"

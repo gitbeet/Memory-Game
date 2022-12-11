@@ -7,7 +7,7 @@ const GameScreen = () => {
   const { setShowMenu, restartGame, setShowNewScreen, setActivePlayer } =
     useGameContext();
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-4">
+    <div className="absolute flex flex-col justify-center items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-4">
       <Header />
       <Board />
       <Players />

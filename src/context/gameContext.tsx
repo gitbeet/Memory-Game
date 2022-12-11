@@ -23,6 +23,7 @@ interface GameContextInterface {
   activeItems: BoardItemInterface[];
   showNewScreen: boolean;
   disabled: boolean;
+  showConfirmWindow: boolean;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setShowNewScreen: React.Dispatch<React.SetStateAction<boolean>>;
   setScreen: React.Dispatch<React.SetStateAction<string>>;
@@ -34,8 +35,10 @@ interface GameContextInterface {
   setBoards: React.Dispatch<React.SetStateAction<BoardInterface[]>>;
   setActiveItems: React.Dispatch<React.SetStateAction<BoardItemInterface[]>>;
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowConfirmWindow: React.Dispatch<React.SetStateAction<boolean>>;
   toggleItemVisible: (id: number) => void;
   restartGame: () => void;
+  exitGame: () => void;
 }
 
 const gameContext = createContext<GameContextInterface | null>(null);
@@ -72,6 +75,8 @@ const GameContextProvider = ({ children }: Props) => {
   const [boards, setBoards] = useState<BoardInterface[]>(generateBoards());
   const [activeItems, setActiveItems] = useState<BoardItemInterface[]>([]);
   const [disabled, setDisabled] = useState(false);
+  const [showConfirmWindow, setShowConfirmWindow] = useState(false);
+
   function generateBoard() {
     let arr: number[] = [];
     for (let i = 0; i < boardSize * boardSize; i += 2) {
@@ -167,6 +172,14 @@ const GameContextProvider = ({ children }: Props) => {
     setScreen("game");
   };
 
+  const exitGame = () => {
+    setBoards(generateBoards());
+    setActiveItems([]);
+    setActivePlayer(1);
+    setPlayersFinished(0);
+    setScreen("welcome");
+  };
+
   const toggleItemVisible = (id: number): void => {
     // ???
     setBoards((prev) =>
@@ -209,6 +222,7 @@ const GameContextProvider = ({ children }: Props) => {
         activeItems,
         showNewScreen,
         disabled,
+        showConfirmWindow,
         setScreen,
         setTheme,
         setSound,
@@ -222,6 +236,8 @@ const GameContextProvider = ({ children }: Props) => {
         restartGame,
         setShowNewScreen,
         setDisabled,
+        exitGame,
+        setShowConfirmWindow,
       }}
     >
       {children}

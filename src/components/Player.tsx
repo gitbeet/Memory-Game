@@ -22,7 +22,7 @@ const Player = ({ board }: Props) => {
         transition={{ type: "spring", duration: 0.4 }}
         className={` ${
           isActive ? "text-neutral-100" : "text-neutral-800"
-        } " text-xl font-bold "`}
+        } " text-2xl font-black "`}
       >
         Player {board.player}
       </motion.h1>
@@ -31,7 +31,7 @@ const Player = ({ board }: Props) => {
         transition={{ type: "spring", duration: 0.4 }}
         className={`${
           isActive ? "text-neutral-100" : "text-neutral-600"
-        } font-semibold`}
+        } font-semibold font-body`}
       >
         Moves: {board.moves}
       </motion.p>
