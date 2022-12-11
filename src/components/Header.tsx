@@ -1,13 +1,14 @@
 import { useGameContext } from "../context/gameContext";
 import { motion, AnimatePresence } from "framer-motion";
 import MenuButton from "./MenuButton";
+import Button from "./Button";
 
 const Header = () => {
   const { setShowMenu, sound, setSound, setScreen } = useGameContext();
   return (
     <div className="w-max flex justify-between items-center space-x-12 pb-12">
       <h1 className=" text-3xl font-black text-neutral-800">Memory Game</h1>
-      <button onClick={() => setScreen("gameOver")}>WIN</button>
+      <Button text="WIN" onClick={() => setScreen("gameOver")} />
       <div className="flex space-x-4">
         <div
           onClick={() => setShowMenu(true)}
