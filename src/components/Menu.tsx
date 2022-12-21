@@ -47,22 +47,24 @@ const Menu = () => {
       {showMenu ? (
         <>
           <motion.div
-            initial={{ scale: 0.2 }}
+            initial={{ scale: 0.2, translateX: "-50%", translateY: "-50%" }}
             animate={{
               scale: [null, 1.05, 1],
+              translateX: "-50%",
+              translateY: "-50%",
               transition: { type: "spring", duration: 0.3, stiffness: 100 },
             }}
             exit={{
-              opacity: 0,
-              // scale: [1, 1.05, 0.5],
+              opacity: [1, 1, 0],
+              scale: [1, 1.05, 0],
+              translateX: "-50%",
+              translateY: "-50%",
               transition: { type: "spring", duration: 0.4, stiffness: 100 },
             }}
             className="fixed z-10 bg-neutral-100 rounded-md  p-8 w-max space-y-12  "
             style={{
               left: "50%",
               top: "50%",
-              translateX: "-50%",
-              translateY: "-50%",
             }}
           >
             <div className="absolute top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
@@ -93,7 +95,7 @@ const Menu = () => {
               />
               <MenuSetting
                 disabledInGame={true}
-                title="Board Size"
+                title="Board"
                 tempValue={tempBoardSize}
                 setTempValue={setTempBoardSize}
                 options={["4x4", "6x6"]}

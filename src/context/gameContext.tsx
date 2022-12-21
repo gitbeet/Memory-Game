@@ -10,7 +10,6 @@ import { shuffleArray } from "../utility/shuffleArray";
 interface Props {
   children: ReactNode;
 }
-
 interface GameContextInterface {
   screen: string;
   theme: string;
@@ -25,6 +24,7 @@ interface GameContextInterface {
   disabled: boolean;
   showConfirmWindow: boolean;
   timer: number;
+  activeVisible: boolean;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
   setShowNewScreen: React.Dispatch<React.SetStateAction<boolean>>;
   setScreen: React.Dispatch<React.SetStateAction<string>>;
@@ -38,6 +38,7 @@ interface GameContextInterface {
   setDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setShowConfirmWindow: React.Dispatch<React.SetStateAction<boolean>>;
   setTimer: React.Dispatch<React.SetStateAction<number>>;
+  setActiveVisible: React.Dispatch<React.SetStateAction<boolean>>;
   toggleItemVisible: (id: number) => void;
   restartGame: () => void;
   exitGame: () => void;
@@ -79,7 +80,7 @@ const GameContextProvider = ({ children }: Props) => {
   const [disabled, setDisabled] = useState(false);
   const [showConfirmWindow, setShowConfirmWindow] = useState(false);
   const [timer, setTimer] = useState(0);
-
+  const [activeVisible, setActiveVisible] = useState(false);
   function generateBoard() {
     let arr: number[] = [];
     for (let i = 0; i < boardSize * boardSize; i += 2) {
@@ -229,6 +230,7 @@ const GameContextProvider = ({ children }: Props) => {
         disabled,
         showConfirmWindow,
         timer,
+        activeVisible,
         setScreen,
         setTheme,
         setSound,
@@ -245,6 +247,7 @@ const GameContextProvider = ({ children }: Props) => {
         exitGame,
         setShowConfirmWindow,
         setTimer,
+        setActiveVisible,
       }}
     >
       {children}

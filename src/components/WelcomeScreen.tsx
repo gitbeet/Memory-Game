@@ -27,7 +27,7 @@ const childrenVariants = {
 };
 
 const WelcomeScreen = () => {
-  const { setShowMenu, setScreen } = useGameContext();
+  const { setShowMenu, setScreen, setActiveVisible } = useGameContext();
   return (
     <motion.div
       variants={parentVariants}
@@ -51,7 +51,15 @@ const WelcomeScreen = () => {
           <Button text="Start Game" onClick={() => setScreen("game")} />
         </motion.div>
         <motion.div variants={childrenVariants}>
-          <Button text="Settings" onClick={() => setShowMenu(true)} />
+          <Button
+            text="Settings"
+            onClick={() => {
+              setShowMenu(true);
+              setTimeout(() => {
+                setActiveVisible(true);
+              }, 420);
+            }}
+          />
         </motion.div>
       </motion.div>
     </motion.div>

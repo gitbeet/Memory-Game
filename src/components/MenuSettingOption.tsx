@@ -17,7 +17,7 @@ const MenuSettingOption = ({
   option,
   disabledInGame,
 }: Props) => {
-  const { screen } = useGameContext();
+  const { screen, activeVisible } = useGameContext();
   const isActive = tempValue === option.toString().toLowerCase();
   return (
     <>
@@ -34,10 +34,21 @@ const MenuSettingOption = ({
         >
           {option}
         </motion.p>
-        {isActive ? (
+        {isActive && activeVisible ? (
           <motion.div
+            initial={false}
+            animate={{ transition: { duration: 0.5, delay: 2 } }}
+            exit={{ opacity: 0 }}
             transition={{ type: "spring", duration: 0.3 }}
             layoutId={title}
+            // style={{
+            //   position: "absolute",
+            //   top: "-8px",
+            //   bottom: "-8px",
+            //   left: "-8px",
+            //   right: "-8px",
+            //   zIndex: 0,
+            // }}
             className={
               title +
               " absolute z-0 rounded-md  bg-accent-500 -top-2 -bottom-2 -left-2 -right-2"
