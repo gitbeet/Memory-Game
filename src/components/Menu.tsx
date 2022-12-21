@@ -18,8 +18,6 @@ const Menu = () => {
     setPlayers,
     setSound,
     setBoardSize,
-    setScreen,
-    exitGame,
     setShowConfirmWindow,
   } = useGameContext();
   const [tempPlayers, setTempPlayers] = useState<number | string>(players);
@@ -31,47 +29,52 @@ const Menu = () => {
 
   const saveChanges = () => {
     setTheme(tempTheme);
-    setPlayers(Number(tempPlayers));
     setSound(tempSound);
     setBoardSize(parseInt(tempBoardSize[0]));
+    setPlayers(Number(tempPlayers));
     setShowMenu(false);
   };
 
-  const exit = () => {
-    setScreen("welcome");
+  const cancelChanges = () => {
     setShowMenu(false);
-    exitGame();
+    setTempBoardSize(`${boardSize}x${boardSize}`);
+    setTempPlayers(players);
+    setTempSound(sound);
+    setTempTheme(theme);
   };
+
   return (
     <AnimatePresence>
       {showMenu ? (
         <>
           <motion.div
-            initial={{ scale: 0.2, translateX: "-50%", translateY: "-50%" }}
-            animate={{
-              scale: [null, 1.05, 1],
+            initial={{
+              scale: 0.2,
               translateX: "-50%",
               translateY: "-50%",
+              left: "50%",
+              top: "50%",
+            }}
+            animate={{
+              scale: [null, 1.05, 1],
+
               transition: { type: "spring", duration: 0.3, stiffness: 100 },
             }}
             exit={{
               opacity: [1, 1, 0],
               scale: [1, 1.05, 0],
-              translateX: "-50%",
-              translateY: "-50%",
+
               transition: { type: "spring", duration: 0.4, stiffness: 100 },
             }}
-            className="fixed z-10 bg-neutral-100 rounded-md  p-8 w-max space-y-12  "
-            style={{
-              left: "50%",
-              top: "50%",
-            }}
+            className="fixed z-10 bg-neutral-100 rounded-md px-4 py-8 md:px-12 md:py-12 w-[min(90%,420px)] space-y-8 md:space-y-12  "
           >
             <div className="absolute top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
               <CloseButton onClick={() => setShowMenu(false)} />
             </div>
-            <h1 className="text-3xl text-neutral-800 font-bold">Settings</h1>
-            <div className="space-y-8  p-4">
+            <h1 className="text-2xl md:text-3xl text-neutral-800 font-bold">
+              Settings
+            </h1>
+            <div className="space-y-8">
               <MenuSetting
                 disabledInGame={false}
                 title="Theme"
@@ -102,11 +105,11 @@ const Menu = () => {
               />
               <div className="space-x-4">
                 <Button text="Accept" onClick={saveChanges} />
-                <Button text="Cancel" onClick={() => setShowMenu(false)} />
+                <Button text="Cancel" onClick={cancelChanges} />
               </div>
             </div>
             {screen !== "welcome" && (
-              <div className="space-y-4">
+              <div className="mt-4">
                 <Button
                   text="Exit To Main Menu"
                   onClick={() => setShowConfirmWindow(true)}

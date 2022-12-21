@@ -31,7 +31,7 @@ const Player = ({ board }: Props) => {
         transition={{ type: "spring", duration: 0.4 }}
         className={` ${
           isActive ? "text-neutral-100" : "text-neutral-800"
-        } "md:hidden text-2xl font-black "`}
+        } " md:hidden text-2xl font-black "`}
       >
         P {board.player}
       </motion.h1>

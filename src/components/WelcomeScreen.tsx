@@ -1,6 +1,7 @@
 import { useGameContext } from "../context/gameContext";
 import Button from "./Button";
 import { motion } from "framer-motion";
+import logoLetters from "../assets/logo-letters.png";
 
 const parentVariants = {
   hidden: { opacity: 0, y: 80 },
@@ -33,15 +34,21 @@ const WelcomeScreen = () => {
       variants={parentVariants}
       initial="hidden"
       animate="visible"
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-28"
+      className="absolute w-[min(90%,420px)] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-12 space-y-28"
       style={{ translateX: "-50%", translateY: "-50%" }}
     >
-      <motion.h1
+      <motion.img
+        variants={parentVariants}
+        src={logoLetters}
+        alt="logo"
+        className="w-full"
+      />
+      {/* <motion.h1
         variants={parentVariants}
         className="text-5xl font-black text-neutral-800"
       >
         Memory Game
-      </motion.h1>
+      </motion.h1> */}
       <motion.div
         variants={parentVariants}
         transition={{ delay: 0.4, staggerChildren: 0.2 }}

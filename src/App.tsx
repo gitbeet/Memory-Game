@@ -6,7 +6,11 @@ import Menu from "./components/Menu";
 import NewGameScreen from "./components/NewGameScreen";
 import WelcomeScreen from "./components/WelcomeScreen";
 import { useGameContext } from "./context/gameContext";
+import introSound from "./assets/intro-sound.mp3";
+import { useEffect } from "react";
 
+const introAudio = new Audio(introSound);
+introAudio.volume = 0.5;
 function App() {
   const {
     screen,
@@ -16,8 +20,11 @@ function App() {
     setShowConfirmWindow,
     exitGame,
   } = useGameContext();
+  useEffect(() => {
+    introAudio.play();
+  }, []);
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 min-w-full min-h-full">
+    <div className="absolute top-0 left-0 right-0 bottom-0 min-w-full min-h-full overflow-hidden">
       {screen === "welcome" ? <WelcomeScreen /> : null}
       {screen === "game" ? <GameScreen /> : null}
       {screen === "gameOver" ? <GameOverScreen /> : null}

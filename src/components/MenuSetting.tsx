@@ -2,7 +2,7 @@ import { useGameContext } from "../context/gameContext";
 import MenuSettingOption from "./MenuSettingOption";
 
 interface Props {
-  tempValue: string | number;
+  tempValue: string;
   setTempValue: any;
   options: string[] | number[];
   title: string;
@@ -18,8 +18,8 @@ const MenuSetting = ({
 }: Props) => {
   const { screen } = useGameContext();
   return (
-    <div className="flex justify-between items-center space-x-8  p-4 bg-neutral-150 rounded-md">
-      <h1 className="text-lg text-neutral-800 font-bold">{title}</h1>
+    <div className="flex justify-between items-center space-x-4 md:space-x-8  p-4 bg-neutral-150 rounded-md">
+      <h1 className="text-md md:text-lg text-neutral-800 font-bold">{title}</h1>
       <div
         className={`flex justify-between ${
           screen === "game" && disabledInGame ? "opacity-25" : ""

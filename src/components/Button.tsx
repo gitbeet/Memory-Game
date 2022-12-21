@@ -6,7 +6,7 @@ interface Props {
 const Button = ({ text, onClick }: Props) => {
   return (
     <button
-      className="bg-neutral-800 hover:bg-opacity-75 text-xl text-neutral-100 font-black px-6 py-4 rounded-full transition-all duration-150"
+      className="bg-neutral-800 hover:bg-accent-500 hover:text-neutral-100 text-md md:text-xl text-neutral-100 font-black px-4 py-3 md:px-6 md:py-4 rounded-full transition-all duration-150"
       onClick={onClick}
     >
       {text}

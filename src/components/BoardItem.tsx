@@ -26,34 +26,25 @@ interface Props {
 }
 
 const BoardItem = ({ boardItem }: Props) => {
-  const { toggleItemVisible, theme, activeItems, disabled } = useGameContext();
+  const { toggleItemVisible, theme, activeItems, disabled, boardSize } =
+    useGameContext();
   const { value, id, visible } = boardItem;
-  const [key, setKey] = useState(0);
   const isActive = id === activeItems[0]?.id || id === activeItems[1]?.id;
   const themedValue: number | string =
     theme === "numbers" ? value : emojiMap[value];
 
-  useEffect(() => {
-    console.log(key);
-  }, [key]);
-
-  useEffect(() => {
-    if (visible) {
-      setKey(1);
-    } else {
-      setKey(0);
-    }
-  }, [visible]);
-
   return (
     <motion.div
-      layout
-      key={key}
-      initial={{ scale: 1 }}
+      key={visible ? 1 : 0}
+      initial={false}
       animate={{ scaleX: [null, 1.15, 0, 1.15, 1] }}
       transition={{ duration: 0.5, type: "spring" }}
       onClick={() => toggleItemVisible(id)}
-      className={`cursor-pointer w-16 h-16 select-none
+      className={`cursor-pointer ${
+        boardSize === 4
+          ? "w-[72px] h-[72px] md:w-20 md:h-20"
+          : "w-[47px] h-[47px] md:w-[60px] md:h-[60px]"
+      } select-none
       ${disabled || isActive ? "pointer-events-none" : ""}
        ${
          isActive
@@ -61,7 +52,7 @@ const BoardItem = ({ boardItem }: Props) => {
            : visible
            ? "bg-neutral-300"
            : "bg-neutral-800"
-       } rounded-2xl text-neutral-100 flex justify-center items-center`}
+       } rounded-2xl  text-neutral-100 flex justify-center items-center`}
     >
       {visible ? (
         <motion.p
@@ -69,7 +60,7 @@ const BoardItem = ({ boardItem }: Props) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl text-center font-bold"
+          className="text-3xl md:text-4xl text-center font-bold"
         >
           {themedValue}
         </motion.p>

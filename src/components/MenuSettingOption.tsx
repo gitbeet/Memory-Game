@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "../index.css";
 
 interface Props {
-  tempValue: string | number;
+  tempValue: string;
   setTempValue: React.Dispatch<React.SetStateAction<number | string>>;
   option: string | number;
   title: string;
@@ -17,45 +17,39 @@ const MenuSettingOption = ({
   option,
   disabledInGame,
 }: Props) => {
-  const { screen, activeVisible } = useGameContext();
+  const { screen } = useGameContext();
   const isActive = tempValue === option.toString().toLowerCase();
   return (
     <>
-      <motion.button
-        //   key={isActive ? 1 : 0}
+      <button
+        style={{ position: "relative" }}
         disabled={screen === "game" && disabledInGame}
-        className="text-neutral-800  relative"
+        className="text-neutral-800 "
         onClick={() => setTempValue(option.toString().toLowerCase())}
       >
         <motion.p
           className={`${
             isActive ? "text-neutral-100" : "text-neutral-300"
-          } relative  z-10 mx-4 font-bold`}
+          } text-md relative  z-10 mx-2 md:mx-4 font-bold`}
         >
           {option}
         </motion.p>
-        {isActive && activeVisible ? (
+        {isActive && (
           <motion.div
-            initial={false}
-            animate={{ transition: { duration: 0.5, delay: 2 } }}
-            exit={{ opacity: 0 }}
+            initial={{
+              position: "absolute",
+              zIndex: 0,
+              top: "-6px",
+              bottom: "-6px",
+              left: "-6px",
+              right: "-6px",
+            }}
             transition={{ type: "spring", duration: 0.3 }}
             layoutId={title}
-            // style={{
-            //   position: "absolute",
-            //   top: "-8px",
-            //   bottom: "-8px",
-            //   left: "-8px",
-            //   right: "-8px",
-            //   zIndex: 0,
-            // }}
-            className={
-              title +
-              " absolute z-0 rounded-md  bg-accent-500 -top-2 -bottom-2 -left-2 -right-2"
-            }
+            className={title + " rounded-md  bg-accent-500 "}
           ></motion.div>
-        ) : null}
-      </motion.button>
+        )}
+      </button>
     </>
   );
 };

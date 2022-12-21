@@ -26,7 +26,7 @@ const ConfirmWindow = ({ message, onConfirm, onCancel }: Props) => {
               // scale: [1, 1.05, 0.5],
               transition: { type: "spring", duration: 0.4, stiffness: 100 },
             }}
-            className="fixed z-20 bg-neutral-100 rounded-md  p-12 w-max space-y-12  "
+            className="fixed z-20 bg-neutral-100 rounded-md  p-8 w-[min(90%,420px)] space-y-12  "
             style={{
               left: "50%",
               top: "50%",
@@ -37,7 +37,7 @@ const ConfirmWindow = ({ message, onConfirm, onCancel }: Props) => {
             <div className="absolute top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
               <CloseButton onClick={onCancel} />
             </div>
-            <p className="w-[300px] text-neutral-600 text-lg font-semibold">
+            <p className="w-fit text-neutral-600 text-lg font-semibold">
               {message}
             </p>
             <div className="flex w-full justify-center space-x-4">

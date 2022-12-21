@@ -5,10 +5,8 @@ interface Props {
 const CloseButton = ({ onClick }: Props) => {
   return (
     <svg
-      className="cursor-pointer text-neutral-800 hover:text-neutral-600 transition-all duration-150"
+      className="cursor-pointer w-5 h-5 md:w-6 md:h-6 text-neutral-800 hover:text-accent-500 transition-all duration-150"
       onClick={onClick}
-      width="24"
-      height="24"
       viewBox="0 0 65 65"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

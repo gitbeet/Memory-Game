@@ -76,13 +76,12 @@ const GameOverScreen = () => {
       >
         Great Job!
       </motion.h1>
-      <motion.p
-        variants={singlePlayerChildrenVariants}
-        className="text-2xl text-semibold text-neutral-800 w-max"
-      >
-        You won the game in only :{" "}
-        <span className="font-black">{boards[0].moves}</span> moves
-      </motion.p>
+      <motion.div className="w-full" variants={singlePlayerChildrenVariants}>
+        <p className="text-2xl text-semibold text-neutral-800 ">
+          You won the game in only :{" "}
+          <span className="font-black">{boards[0].moves}</span> moves
+        </p>
+      </motion.div>
       <motion.p
         variants={singlePlayerChildrenVariants}
         className="text-2xl text-semibold text-neutral-800"
@@ -96,19 +95,19 @@ const GameOverScreen = () => {
   );
   const multiPlayerContent = (
     <div className="space-y-24">
-      <h1 className="text-4xl text-neutral-600 font-semibold w-max">
-        <span className="font-black text-neutral-800">Player {winner}</span> is
-        the winner!
+      <h1 className="text-4xl text-neutral-600 font-semibold w-fit md:w-max">
+        <span className="font-black text-neutral-800">Player {winner} </span>
+        is the winner!
       </h1>
-      <div className="space-y-8 p-8 ">
-        <p className="bg-neutral-100 text-3xl font-bold text-neutral-800">
-          Result
+      <div className="space-y-8 md:space-y-12 ">
+        <p className="bg-neutral-100 text-3xl font-black text-neutral-800">
+          Standings
         </p>
         <motion.div
           variants={parentVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-4"
+          className="space-y-4 md:space-y-8"
         >
           {boards
             .sort((a, b) => a.moves - b.moves)
@@ -118,7 +117,7 @@ const GameOverScreen = () => {
                 className={
                   (i === 0
                     ? "bg-accent-500 text-neutral-100 "
-                    : "bg-neutral-150 text-neutral-600 ") + "   py-4 rounded-md"
+                    : "bg-neutral-150 text-neutral-600 ") + " py-4  rounded-md"
                 }
               >
                 <h1 className="text-xl font-black">Player {board.player}</h1>
@@ -140,7 +139,7 @@ const GameOverScreen = () => {
       variants={parentVariants}
       initial="hidden"
       animate="visible"
-      className="absolute w-[90%] flex flex-col justify-center items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 space-y-32"
+      className="absolute w-full flex flex-col justify-center items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-6 space-y-32"
       style={{ translateX: "-50%", translateY: "-50%" }}
     >
       {boards.length < 2 ? singlePlayerContent : multiPlayerContent}
