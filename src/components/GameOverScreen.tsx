@@ -53,7 +53,7 @@ const singlePlayerChildrenVariants = {
 };
 
 const GameOverScreen = () => {
-  const { boards, setScreen, restartGame, timer } = useGameContext();
+  const { boards, exitGame, restartGame, timer } = useGameContext();
 
   const winner = [...boards]
     .map((board) => {
@@ -113,6 +113,7 @@ const GameOverScreen = () => {
             .sort((a, b) => a.moves - b.moves)
             .map((board, i) => (
               <motion.div
+                key={i}
                 variants={childrenVariants}
                 className={
                   (i === 0
@@ -145,7 +146,7 @@ const GameOverScreen = () => {
       {boards.length < 2 ? singlePlayerContent : multiPlayerContent}
       <div className="space-x-4">
         <Button text="Play Again" onClick={() => restartGame()} />
-        <Button text="Exit" onClick={() => setScreen("welcome")} />
+        <Button text="Exit" onClick={() => exitGame()} />
       </div>
     </motion.div>
   );
