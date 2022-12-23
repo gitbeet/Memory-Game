@@ -20,13 +20,12 @@ interface GameContextInterface {
   activePlayer: number;
   boards: BoardInterface[];
   activeItems: BoardItemInterface[];
-  showNewScreen: boolean;
   disabled: boolean;
   showConfirmWindow: boolean;
   timer: number;
   activeVisible: boolean;
+  showRulesWindow: boolean;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowNewScreen: React.Dispatch<React.SetStateAction<boolean>>;
   setScreen: React.Dispatch<React.SetStateAction<string>>;
   setTheme: React.Dispatch<React.SetStateAction<string>>;
   setSound: React.Dispatch<React.SetStateAction<string>>;
@@ -39,6 +38,7 @@ interface GameContextInterface {
   setShowConfirmWindow: React.Dispatch<React.SetStateAction<boolean>>;
   setTimer: React.Dispatch<React.SetStateAction<number>>;
   setActiveVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowRulesWindow: React.Dispatch<React.SetStateAction<boolean>>;
   toggleItemVisible: (id: number) => void;
   restartGame: () => void;
   exitGame: () => void;
@@ -67,7 +67,8 @@ export interface BoardInterface {
 
 const GameContextProvider = ({ children }: Props) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [showNewScreen, setShowNewScreen] = useState(false);
+  const [showConfirmWindow, setShowConfirmWindow] = useState(false);
+  const [showRulesWindow, setShowRulesWindow] = useState(false);
   const [screen, setScreen] = useState("welcome");
   const [theme, setTheme] = useState("numbers");
   const [sound, setSound] = useState("on");
@@ -78,13 +79,15 @@ const GameContextProvider = ({ children }: Props) => {
   const [boards, setBoards] = useState<BoardInterface[]>(generateBoards());
   const [activeItems, setActiveItems] = useState<BoardItemInterface[]>([]);
   const [disabled, setDisabled] = useState(false);
-  const [showConfirmWindow, setShowConfirmWindow] = useState(false);
   const [timer, setTimer] = useState(0);
   const [activeVisible, setActiveVisible] = useState(false);
   function generateBoard() {
     let arr: number[] = [];
     for (let i = 0; i < boardSize * boardSize; i += 2) {
-      const value: number = Math.floor(Math.random() * 16);
+      let value: number = Math.floor(Math.random() * 16);
+      while (arr.findIndex((val) => val === value) !== -1) {
+        value = Math.floor(Math.random() * 16);
+      }
       arr.push(value);
       arr.push(value);
     }
@@ -226,11 +229,11 @@ const GameContextProvider = ({ children }: Props) => {
         activePlayer,
         boards,
         activeItems,
-        showNewScreen,
         disabled,
         showConfirmWindow,
         timer,
         activeVisible,
+        showRulesWindow,
         setScreen,
         setTheme,
         setSound,
@@ -242,12 +245,12 @@ const GameContextProvider = ({ children }: Props) => {
         setActiveItems,
         toggleItemVisible,
         restartGame,
-        setShowNewScreen,
         setDisabled,
         exitGame,
         setShowConfirmWindow,
         setTimer,
         setActiveVisible,
+        setShowRulesWindow,
       }}
     >
       {children}

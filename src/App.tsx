@@ -3,23 +3,17 @@ import ConfirmWindow from "./components/ConfirmWindow";
 import GameOverScreen from "./components/GameOverScreen";
 import GameScreen from "./components/GameScreen";
 import Menu from "./components/Menu";
-import NewGameScreen from "./components/NewGameScreen";
 import WelcomeScreen from "./components/WelcomeScreen";
 import { useGameContext } from "./context/gameContext";
 import introSound from "./assets/intro-sound.mp3";
 import { useEffect } from "react";
+import Rules from "./components/Rules";
 
 const introAudio = new Audio(introSound);
 introAudio.volume = 0.5;
 function App() {
-  const {
-    screen,
-    showMenu,
-    showNewScreen,
-    setShowMenu,
-    setShowConfirmWindow,
-    exitGame,
-  } = useGameContext();
+  const { screen, showMenu, setShowMenu, setShowConfirmWindow, exitGame } =
+    useGameContext();
   useEffect(() => {
     introAudio.play();
   }, []);
@@ -28,8 +22,8 @@ function App() {
       {screen === "welcome" ? <WelcomeScreen /> : null}
       {screen === "game" ? <GameScreen /> : null}
       {screen === "gameOver" ? <GameOverScreen /> : null}
-      {showNewScreen ? <NewGameScreen /> : null}
       <Menu />
+      <Rules />
       <ConfirmWindow
         message="Are you sure you want to exit the game? Any progress will be lost."
         onConfirm={() => {

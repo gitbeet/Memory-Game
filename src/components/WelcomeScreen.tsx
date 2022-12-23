@@ -28,7 +28,8 @@ const childrenVariants = {
 };
 
 const WelcomeScreen = () => {
-  const { setShowMenu, setScreen, setActiveVisible } = useGameContext();
+  const { setShowMenu, setScreen, setActiveVisible, setShowRulesWindow } =
+    useGameContext();
   return (
     <motion.div
       variants={parentVariants}
@@ -43,12 +44,6 @@ const WelcomeScreen = () => {
         alt="logo"
         className="w-full"
       />
-      {/* <motion.h1
-        variants={parentVariants}
-        className="text-5xl font-black text-neutral-800"
-      >
-        Memory Game
-      </motion.h1> */}
       <motion.div
         variants={parentVariants}
         transition={{ delay: 0.4, staggerChildren: 0.2 }}
@@ -67,6 +62,9 @@ const WelcomeScreen = () => {
               }, 420);
             }}
           />
+        </motion.div>
+        <motion.div variants={childrenVariants}>
+          <Button text="Rules" onClick={() => setShowRulesWindow(true)} />
         </motion.div>
       </motion.div>
     </motion.div>
