@@ -1,6 +1,7 @@
 import { useGameContext } from "../context/gameContext";
 import { motion } from "framer-motion";
 import "../index.css";
+import switchSound from "../assets/button-switch.wav";
 
 interface Props {
   tempValue: string;
@@ -17,6 +18,8 @@ const MenuSettingOption = ({
   option,
   disabledInGame,
 }: Props) => {
+  const switchAudio = new Audio(switchSound);
+  const { sound } = useGameContext();
   const { screen } = useGameContext();
   const isActive = tempValue === option.toString().toLowerCase();
   return (
@@ -25,7 +28,11 @@ const MenuSettingOption = ({
         style={{ position: "relative" }}
         disabled={screen === "game" && disabledInGame}
         className="text-neutral-800 "
-        onClick={() => setTempValue(option.toString().toLowerCase())}
+        onClick={() => {
+          setTempValue(option.toString().toLowerCase());
+          if (!sound) return;
+          switchAudio.play();
+        }}
       >
         <motion.p
           className={`${

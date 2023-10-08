@@ -1,12 +1,7 @@
-interface Props {
-  onClick: () => void;
-}
-
-const CloseButton = ({ onClick }: Props) => {
+const CloseButton = () => {
   return (
     <svg
       className="cursor-pointer w-5 h-5 md:w-6 md:h-6 text-neutral-800 hover:text-accent-500 transition-all duration-150"
-      onClick={onClick}
       viewBox="0 0 65 65"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

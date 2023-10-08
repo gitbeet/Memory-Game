@@ -56,7 +56,7 @@ const GameScreen = () => {
       >
         <Players />
 
-        {/* button for ending game fast for testing purposes */}
+        {/* WIN BUTTON FOR TESTING */}
 
         {/* <button
           onClick={() => setScreen("gameOver")}

@@ -1,6 +1,7 @@
 import { BoardItemInterface, useGameContext } from "../context/gameContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import turnSound from "../assets/button-turn.mp3";
 
 const emojiMap: any = {
   0: "💩",
@@ -46,6 +47,8 @@ interface Props {
 }
 
 const BoardItem = ({ boardItem }: Props) => {
+  const { sound } = useGameContext();
+  const turnAudio = new Audio(turnSound);
   const { toggleItemVisible, theme, activeItems, disabled, boardSize } =
     useGameContext();
   const { value, id, visible } = boardItem;
@@ -59,7 +62,11 @@ const BoardItem = ({ boardItem }: Props) => {
       initial={false}
       animate={{ scaleX: [null, 1.15, 0, 1.15, 1] }}
       transition={{ duration: 0.5, type: "spring" }}
-      onClick={() => toggleItemVisible(id)}
+      onClick={() => {
+        toggleItemVisible(id);
+        if (!sound) return;
+        turnAudio.play();
+      }}
       className={`cursor-pointer ${
         boardSize === 4
           ? "w-[72px] h-[72px] md:w-20 md:h-20"

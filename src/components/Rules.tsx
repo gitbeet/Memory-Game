@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useGameContext } from "../context/gameContext";
 import CloseButton from "./CloseButton";
+import Button from "./Button";
 
 const Rules = () => {
   const { showRulesWindow, setShowRulesWindow } = useGameContext();
@@ -30,7 +31,11 @@ const Rules = () => {
             className="fixed z-10 bg-neutral-100 rounded-md px-8 py-8 md:px-16 md:py-12 w-[min(90%,720px)] max-h-[75vh]  space-y-8 md:space-y-12 grid grid-flow-row grid-rows-[1fr,5.4fr] "
           >
             <div className="fixed z-[1000] top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
-              <CloseButton onClick={() => setShowRulesWindow(false)} />
+              <Button
+                onClick={() => setShowRulesWindow(false)}
+                transparent
+                text={<CloseButton />}
+              />
             </div>
             <header className="text-2xl md:text-3xl text-neutral-800 font-bold">
               Rules

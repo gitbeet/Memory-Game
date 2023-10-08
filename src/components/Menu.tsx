@@ -68,14 +68,16 @@ const Menu = () => {
             }}
             className="fixed z-10 bg-neutral-100 rounded-md px-4 py-8 md:px-12 md:py-12 w-[min(90%,420px)] space-y-8 md:space-y-12  "
           >
-            {/* TESTING PURPOSES */}
+            <Button
+              transparent
+              onClick={() => setShowMenu(false)}
+              text={
+                <div className="absolute top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
+                  <CloseButton />
+                </div>
+              }
+            />
 
-            {/* <p>{boardSize}</p>
-            <p>{tempBoardSize}</p>
-            <p>{parseInt(tempBoardSize.split("")[0])}</p> */}
-            <div className="absolute top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
-              <CloseButton onClick={() => setShowMenu(false)} />
-            </div>
             <h1 className="text-2xl md:text-3xl text-neutral-800 font-bold">
               Settings
             </h1>
