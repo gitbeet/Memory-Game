@@ -8,7 +8,7 @@ The project is hosted on **vercel.com**. You can visit it by clicking [here](htt
 
 ## Project status
 
-The project is almost completed. Still working on adding sound effects. It has similar functionality as described in the [challenge page](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL).
+The project is almost completed. Still working on adding sound effects. It has similar functionality as described in the [challenge page](https://www.frontendmentor.io/challenges/memory-game-vse4WFPvM).
 
 ## Features
 
