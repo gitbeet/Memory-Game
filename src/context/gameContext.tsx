@@ -65,6 +65,40 @@ export interface BoardInterface {
   completed: number;
 }
 
+function generateBoard(boardSize: number) {
+  console.log("started generating board");
+  let arr: number[] = [];
+  for (let i = 0; i < boardSize * boardSize; i += 2) {
+    let value: number = Math.floor(Math.random() * boardSize * boardSize);
+    while (arr.findIndex((val) => val === value) !== -1) {
+      value = Math.floor(Math.random() * 16);
+    }
+    arr.push(value);
+    arr.push(value);
+  }
+  console.log("finished generating board");
+  return shuffleArray(arr).map((value, index) => ({
+    value,
+    id: index,
+    visible: false,
+  }));
+}
+
+function generateBoards(boardSize: number, players: number) {
+  console.log("started generating boardS");
+  let initialBoards = [];
+  for (let i = 0; i < players; i++) {
+    initialBoards.push({
+      player: i + 1,
+      moves: 0,
+      board: generateBoard(boardSize),
+      completed: 0,
+    });
+  }
+  console.log("finished generating boardS");
+  return initialBoards;
+}
+
 const GameContextProvider = ({ children }: Props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showConfirmWindow, setShowConfirmWindow] = useState(false);
@@ -73,34 +107,21 @@ const GameContextProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState("numbers");
   const [sound, setSound] = useState("on");
   const [players, setPlayers] = useState(1);
-  const [boardSize, setBoardSize] = useState(4);
+  const [boardSize, setBoardSize] = useState<number>(4);
   const [activePlayer, setActivePlayer] = useState(1);
   const [playersFinished, setPlayersFinished] = useState(0);
-  const [boards, setBoards] = useState<BoardInterface[]>(generateBoards());
+  const [boards, setBoards] = useState<BoardInterface[]>(
+    generateBoards(boardSize, players)
+  );
   const [activeItems, setActiveItems] = useState<BoardItemInterface[]>([]);
   const [disabled, setDisabled] = useState(false);
   const [timer, setTimer] = useState(0);
   const [activeVisible, setActiveVisible] = useState(false);
-  function generateBoard() {
-    let arr: number[] = [];
-    for (let i = 0; i < boardSize * boardSize; i += 2) {
-      let value: number = Math.floor(Math.random() * 16);
-      while (arr.findIndex((val) => val === value) !== -1) {
-        value = Math.floor(Math.random() * 16);
-      }
-      arr.push(value);
-      arr.push(value);
-    }
-    return shuffleArray(arr).map((value, index) => ({
-      value,
-      id: index,
-      visible: false,
-    }));
-  }
 
   useEffect(() => {
-    setBoards(generateBoards());
-  }, [boardSize]);
+    if (!players && !boardSize) return;
+    setBoards(generateBoards(boardSize, players));
+  }, [boardSize, players]);
 
   useEffect(() => {
     setActivePlayer(playersFinished + 1);
@@ -154,25 +175,8 @@ const GameContextProvider = ({ children }: Props) => {
     }
   }, [boards]);
 
-  useEffect(() => {
-    setBoards(generateBoards());
-  }, [players]);
-
-  function generateBoards() {
-    let initialBoards = [];
-    for (let i = 0; i < players; i++) {
-      initialBoards.push({
-        player: i + 1,
-        moves: 0,
-        board: generateBoard(),
-        completed: 0,
-      });
-    }
-    return initialBoards;
-  }
-
   const restartGame = () => {
-    setBoards(generateBoards());
+    setBoards(generateBoards(boardSize, players));
     setActiveItems([]);
     setActivePlayer(1);
     setPlayersFinished(0);
@@ -181,7 +185,7 @@ const GameContextProvider = ({ children }: Props) => {
   };
 
   const exitGame = () => {
-    setBoards(generateBoards());
+    setBoards(generateBoards(boardSize, players));
     setActiveItems([]);
     setActivePlayer(1);
     setPlayersFinished(0);

@@ -27,7 +27,7 @@ const Rules = () => {
 
               transition: { type: "spring", duration: 0.4, stiffness: 100 },
             }}
-            className="fixed z-10 bg-neutral-100 rounded-md px-8 py-8 md:px-16 md:py-12 w-[min(90%,420px)] max-h-[75vh]  space-y-8 md:space-y-12 grid grid-flow-row grid-rows-[1fr,5.4fr] "
+            className="fixed z-10 bg-neutral-100 rounded-md px-8 py-8 md:px-16 md:py-12 w-[min(90%,720px)] max-h-[75vh]  space-y-8 md:space-y-12 grid grid-flow-row grid-rows-[1fr,5.4fr] "
           >
             <div className="fixed z-[1000] top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
               <CloseButton onClick={() => setShowRulesWindow(false)} />

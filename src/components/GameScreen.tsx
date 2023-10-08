@@ -55,12 +55,15 @@ const GameScreen = () => {
         }}
       >
         <Players />
-        <button
+
+        {/* button for ending game fast for testing purposes */}
+
+        {/* <button
           onClick={() => setScreen("gameOver")}
           className="absolute font-bold text-md bg-neutral-800 text-accent-500 top-0 left-1/2 p-2"
         >
           Win!
-        </button>
+        </button> */}
       </motion.div>
     </div>
   );
