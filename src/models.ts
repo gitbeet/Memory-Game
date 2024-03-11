@@ -14,3 +14,9 @@ export interface BoardInterface {
   board: BoardItemInterface[];
   completed: number;
 }
+
+export type ScreenType =  "welcome" | "game" | "gameOver"
+export type ThemeOptionType = "numbers" | "emojis"
+export type SoundOptionType = "on" | "off"
+export type PlayersOptionType = 1 | 2 | 3 | 4
+export type BoardSizeOptionType = 4 | 6

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import MenuSetting from "./MenuSetting";
 import CloseButton from "./CloseButton";
 import Button from "./Button";
+import { BoardSizeOptionType, PlayersOptionType, SoundOptionType } from "../models";
 
 const Menu = () => {
   const {
@@ -20,8 +21,8 @@ const Menu = () => {
     setBoardSize,
     setShowConfirmWindow,
   } = useGameContext();
-  const [tempPlayers, setTempPlayers] = useState<number | string>(players);
-  const [tempSound, setTempSound] = useState<"on" | "off">(sound);
+  const [tempPlayers, setTempPlayers] = useState<PlayersOptionType>(players);
+  const [tempSound, setTempSound] = useState<SoundOptionType>(sound);
   const [tempTheme, setTempTheme] = useState(theme);
   const [tempBoardSize, setTempBoardSize] = useState(
     `${boardSize}x${boardSize}`
@@ -30,8 +31,8 @@ const Menu = () => {
   const saveChanges = () => {
     setTheme(tempTheme);
     setSound(tempSound);
-    setBoardSize(parseInt(tempBoardSize.split("")[0]) || 4);
-    setPlayers(Number(tempPlayers));
+    setBoardSize(parseInt(tempBoardSize.split("")[0]) as BoardSizeOptionType || 4);
+    setPlayers(tempPlayers);
     setShowMenu(false);
   };
 

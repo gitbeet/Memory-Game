@@ -6,17 +6,13 @@ import {
   useState,
 } from "react";
 import { shuffleArray } from "../utility/shuffleArray";
-import { BoardInterface, BoardItemInterface } from "../models";
+import { BoardInterface, BoardItemInterface, BoardSizeOptionType, PlayersOptionType, ScreenType, SoundOptionType, ThemeOptionType } from "../models";
 
 interface Props {
   children: ReactNode;
 }
 
-type ScreenType =  "welcome" | "game" | "gameOver"
-type ThemeOptionType = "numbers" | "emojis"
-type SoundOptionType = "on" | "off"
-type PlayersOptionType = 1 | 2 | 3 | 4
-type BoardSizeOptionType = 4 | 6
+
 
 interface GameContextInterface {
   screen: ScreenType;
