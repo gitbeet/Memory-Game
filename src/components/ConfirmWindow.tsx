@@ -35,14 +35,20 @@ const ConfirmWindow = ({ message, onConfirm, onCancel }: Props) => {
             }}
           >
             <div className="absolute top-[1.5rem] left-[calc(100%-1.5rem)] -translate-x-full">
-              <CloseButton onClick={onCancel} />
+              <CloseButton />
             </div>
             <p className="w-fit text-neutral-600 text-lg font-semibold">
               {message}
             </p>
             <div className="flex w-full justify-center space-x-4">
-              <Button text="Yes" onClick={onConfirm} />
-              <Button text="No" onClick={onCancel} />
+              <Button
+                text="Yes"
+                onClick={onConfirm}
+              />
+              <Button
+                text="No"
+                onClick={onCancel}
+              />
             </div>
           </motion.div>
           <motion.div

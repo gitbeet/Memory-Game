@@ -2,12 +2,10 @@ import Board from "./Board";
 import Header from "./Header";
 import Players from "./Players";
 import { motion } from "framer-motion";
-import { useGameContext } from "../context/gameContext";
 
 const GameScreen = () => {
-  const { setScreen } = useGameContext();
   return (
-    <div className="absolute w-full h-full flex flex-col justify-between items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-10 py-10 md:px-16 lg:px-32 md:space-y-4">
+    <div className="absolute w-full h-full flex flex-col justify-between items-center left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-10 py-10 md:px-16  max-w-[1100px] md:space-y-4">
       <motion.div
         layout
         initial={{ opacity: 0, y: -100 }}

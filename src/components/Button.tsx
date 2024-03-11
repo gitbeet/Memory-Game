@@ -18,7 +18,7 @@ const Button = ({ text, onClick, transparent = false }: Props) => {
       } text-md md:text-xl text-neutral-100 font-black px-4 py-3 md:px-6 md:py-4 rounded-full transition-all duration-150`}
       onClick={() => {
         onClick();
-        if (!sound) return;
+        if (sound === "off") return;
         clickAudio.play();
       }}
     >

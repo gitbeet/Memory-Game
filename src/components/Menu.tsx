@@ -21,7 +21,7 @@ const Menu = () => {
     setShowConfirmWindow,
   } = useGameContext();
   const [tempPlayers, setTempPlayers] = useState<number | string>(players);
-  const [tempSound, setTempSound] = useState(sound);
+  const [tempSound, setTempSound] = useState<"on" | "off">(sound);
   const [tempTheme, setTempTheme] = useState(theme);
   const [tempBoardSize, setTempBoardSize] = useState(
     `${boardSize}x${boardSize}`

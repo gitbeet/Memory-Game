@@ -1,20 +1,21 @@
-import "./App.css";
+import { useGameContext } from "./context/gameContext";
+import { useEffect } from "react";
+import Menu from "./components/Menu";
+import Rules from "./components/Rules";
 import ConfirmWindow from "./components/ConfirmWindow";
 import GameOverScreen from "./components/GameOverScreen";
 import GameScreen from "./components/GameScreen";
-import Menu from "./components/Menu";
 import WelcomeScreen from "./components/WelcomeScreen";
-import { useGameContext } from "./context/gameContext";
 import introSound from "./assets/intro-sound.mp3";
-import { useEffect } from "react";
-import Rules from "./components/Rules";
+import "./App.css";
 
 const introAudio = new Audio(introSound);
 introAudio.volume = 0.5;
 function App() {
-  const { screen, showMenu, setShowMenu, setShowConfirmWindow, exitGame } =
+  const { screen, setShowMenu, setShowConfirmWindow, exitGame, sound } =
     useGameContext();
   useEffect(() => {
+    if (sound === "off") return;
     introAudio.play();
   }, []);
   return (

@@ -6,16 +6,24 @@ import {
   useState,
 } from "react";
 import { shuffleArray } from "../utility/shuffleArray";
+import { BoardInterface, BoardItemInterface } from "../models";
 
 interface Props {
   children: ReactNode;
 }
+
+type ScreenType =  "welcome" | "game" | "gameOver"
+type ThemeOptionType = "numbers" | "emojis"
+type SoundOptionType = "on" | "off"
+type PlayersOptionType = 1 | 2 | 3 | 4
+type BoardSizeOptionType = 4 | 6
+
 interface GameContextInterface {
-  screen: string;
-  theme: string;
-  sound: string;
-  players: number;
-  boardSize: number;
+  screen: ScreenType;
+  theme: ThemeOptionType;
+  sound: SoundOptionType;
+  players: PlayersOptionType;
+  boardSize: BoardSizeOptionType;
   showMenu: boolean;
   activePlayer: number;
   boards: BoardInterface[];
@@ -26,11 +34,11 @@ interface GameContextInterface {
   activeVisible: boolean;
   showRulesWindow: boolean;
   setShowMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  setScreen: React.Dispatch<React.SetStateAction<string>>;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-  setSound: React.Dispatch<React.SetStateAction<string>>;
-  setPlayers: React.Dispatch<React.SetStateAction<number>>;
-  setBoardSize: React.Dispatch<React.SetStateAction<number>>;
+  setScreen: React.Dispatch<React.SetStateAction<ScreenType>>;
+  setTheme: React.Dispatch<React.SetStateAction<ThemeOptionType>>;
+  setSound: React.Dispatch<React.SetStateAction<SoundOptionType>>;
+  setPlayers: React.Dispatch<React.SetStateAction<PlayersOptionType>>;
+  setBoardSize: React.Dispatch<React.SetStateAction<BoardSizeOptionType>>;
   setActivePlayer: React.Dispatch<React.SetStateAction<number>>;
   setBoards: React.Dispatch<React.SetStateAction<BoardInterface[]>>;
   setActiveItems: React.Dispatch<React.SetStateAction<BoardItemInterface[]>>;
@@ -51,19 +59,6 @@ export const useGameContext = () => {
   if (!context) throw new Error("Game context was not found.");
   return context;
 };
-
-export interface BoardItemInterface {
-  id: number;
-  value: number;
-  visible: boolean;
-}
-
-export interface BoardInterface {
-  player: number;
-  moves: number;
-  board: BoardItemInterface[];
-  completed: number;
-}
 
 function generateBoard(boardSize: number) {
   console.log("started generating board");
@@ -103,11 +98,11 @@ const GameContextProvider = ({ children }: Props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showConfirmWindow, setShowConfirmWindow] = useState(false);
   const [showRulesWindow, setShowRulesWindow] = useState(false);
-  const [screen, setScreen] = useState("welcome");
-  const [theme, setTheme] = useState("numbers");
-  const [sound, setSound] = useState("on");
-  const [players, setPlayers] = useState(1);
-  const [boardSize, setBoardSize] = useState<number>(4);
+  const [screen, setScreen] = useState<ScreenType>("welcome");
+  const [theme, setTheme] = useState<ThemeOptionType>("numbers");
+  const [sound, setSound] = useState<"on" | "off">("off");
+  const [players, setPlayers] = useState<PlayersOptionType>(1);
+  const [boardSize, setBoardSize] = useState<BoardSizeOptionType>(4);
   const [activePlayer, setActivePlayer] = useState(1);
   const [playersFinished, setPlayersFinished] = useState(0);
   const [boards, setBoards] = useState<BoardInterface[]>(

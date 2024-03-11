@@ -1,5 +1,7 @@
-import { BoardInterface, useGameContext } from "../context/gameContext";
+import { useGameContext } from "../context/gameContext";
 import { motion } from "framer-motion";
+import { BoardInterface } from "../models";
+
 interface Props {
   board: BoardInterface;
 }

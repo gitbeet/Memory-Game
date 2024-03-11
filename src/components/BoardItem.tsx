@@ -1,9 +1,10 @@
-import { BoardItemInterface, useGameContext } from "../context/gameContext";
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useGameContext } from "../context/gameContext";
+import { BoardItemInterface } from "../models";
+import { motion } from "framer-motion";
 import turnSound from "../assets/button-turn.mp3";
+import { EmojiMapInterface } from "../models";
 
-const emojiMap: any = {
+const emojiMap: EmojiMapInterface = {
   0: "💩",
   1: "😀",
   2: "🤓",
@@ -64,7 +65,7 @@ const BoardItem = ({ boardItem }: Props) => {
       transition={{ duration: 0.5, type: "spring" }}
       onClick={() => {
         toggleItemVisible(id);
-        if (!sound) return;
+        if (sound === "off") return;
         turnAudio.play();
       }}
       className={`cursor-pointer ${

@@ -30,7 +30,7 @@ const MenuSettingOption = ({
         className="text-neutral-800 "
         onClick={() => {
           setTempValue(option.toString().toLowerCase());
-          if (!sound) return;
+          if (sound === "off") return;
           switchAudio.play();
         }}
       >
